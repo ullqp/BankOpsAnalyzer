@@ -4,7 +4,6 @@ import pandas as pd
 
 from logger.logger_config import logger
 from src.utils import (
-    get_current_date_time,
     get_exchange_rate,
     get_operations_data,
     get_operations_data_current,
@@ -16,9 +15,11 @@ from src.utils import (
 )
 
 
-def main_menu() -> pd.DataFrame:
+def main_menu(current_date: str) -> pd.DataFrame:
+    """Функция, которая запускает главную страницу."""
+
     logger.info("ЗАПУСК ГЛАВНОГО МЕНЮ.")
-    current_date = get_current_date_time()
+
     user_settings = get_user_settings()
     operations_data = get_operations_data()
     operations_data_current = get_operations_data_current(operations_data, current_date)

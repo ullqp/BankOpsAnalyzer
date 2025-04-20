@@ -1,18 +1,20 @@
+from typing import Any, Dict, List
+
 import pytest
 
 
 @pytest.fixture
-def user_settings():
+def user_settings() -> Dict[str, List[str]]:
     return {"user_currencies": ["USD", "EUR"], "user_stocks": ["AAPL", "GOOGL"]}
 
 
 @pytest.fixture
-def current_date():
+def current_date() -> str:
     return "2019-07-14 19:05:01"
 
 
 @pytest.fixture
-def operations() -> list:
+def operations() -> List[Dict[str, Any]]:
     return [
         {
             "Дата операции": "16.09.2019 13:27:53",

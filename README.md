@@ -22,12 +22,18 @@ git clone https://github.com/ullqp/BankOpsAnalyzer.git
 from src.views import main_menu
 from src.services import simple_search
 from src.reports import spending_by_category
+from src.utils import get_current_date_time, get_operations_data
+
 
 # Пример использования main_menu
-transactions = main_menu()
+current_date_str = get_current_date_time()
+transactions = main_menu(current_date_str)
 
 # Пример использования simple_search
-print(simple_search())
+operations_data = get_operations_data()
+search_str = "бонусы"
+
+print(simple_search(search_str, operations_data))
 
 # Пример использования spending_by_category
 print(spending_by_category(transactions, "Переводы", "01.03.2019"))

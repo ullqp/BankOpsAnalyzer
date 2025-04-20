@@ -1,14 +1,12 @@
 import json
 
 from logger.logger_config import logger
-from src.utils import get_operations_data
 
 
-def simple_search() -> str:
+def simple_search(search_str: str, operations_data: list[dict]) -> str:
     """Функция, которая фильтрует операции по введенному слову."""
     logger.info('ЗАПУСК СЕРВИСА "ПРОСТОЙ ПОИСК"')
-    operations_data = get_operations_data()
-    search_str = input("Введите строчку, по которой выполнен будет поиск транзакций.").lower()
+    search_str = search_str.lower()
     founded_operations: list = []
     for operation in operations_data:
         category = str(operation.get("Категория", "")).lower()

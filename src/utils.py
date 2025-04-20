@@ -1,8 +1,10 @@
 import datetime
 import heapq
 import json
+import math
 import os
 from pathlib import Path
+from typing import Any, Dict, Optional
 
 import pandas as pd
 import requests
@@ -28,7 +30,7 @@ def get_operations_data() -> list[dict]:
     return operations_data
 
 
-def get_user_settings() -> dict | None:
+def get_user_settings() -> Optional[Dict[str, Any]]:
     """Функция, которая возвращает пользовательские настройки из json-файла."""
 
     project_root = Path(__file__).parent.parent  # Поднимаемся на два уровня вверх из src/
@@ -37,7 +39,7 @@ def get_user_settings() -> dict | None:
     try:
         # Читаем и загружаем JSON файл
         with open(settings_path, "r", encoding="utf-8") as f:
-            user_settings = json.load(f)
+            user_settings: Dict[str, Any] = json.load(f)
             logger.info("Настройки пользователя из json-файла успешно получены.")
             return user_settings
     except Exception as ex:
@@ -91,6 +93,12 @@ def get_statistics(operations_data_current: list) -> list:
 
     for operation in operations_data_current:
         last_digits = operation.get("Номер карты")
+
+        if isinstance(last_digits, float) and math.isnan(last_digits):
+            continue
+
+        if last_digits is None or (isinstance(last_digits, str) and last_digits.strip() == ""):
+            continue
 
         if not any(card["last_digits"] == last_digits for card in cards):
 

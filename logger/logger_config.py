@@ -2,8 +2,9 @@ import logging
 import logging.config
 
 
-def setup_logging():
-    logging_config = {
+def setup_logging() -> None:
+    """Настройка логирования."""
+    logging_config: dict = {
         "version": 1,
         "formatters": {
             "detailed": {
