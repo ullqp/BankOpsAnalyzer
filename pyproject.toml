@@ -1,0 +1,67 @@
+[project]
+name = "bankopsanalyzer"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Baranova.K"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "requests>=2.32.3,<3.0.0",
+    "pandas>=2.2.3,<3.0.0",
+    "openpyxl>=3.1.5,<4.0.0",
+    "python-dotenv>=1.1.0,<2.0.0"
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+flake8 = "^7.2.0"
+pytest-cov = "^6.1.1"
+freezegun = "^1.5.1"
+# Добавляем типы для библиотек
+types-requests = "^2.31.0"
+pandas-stubs = "^2.1.0"
+types-freezegun = "^1.1.0"
+
+[tool.poetry.group.lint.dependencies]
+mypy = "^1.15.0"
+black = "^25.1.0"
+isort = "^6.0.1"
+
+[tool.black]
+line-length = 119
+target-version = ["py313"]
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | __pycache__
+  | \.mypy_cache
+  | \.pytest_cache
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 119
+known_third_party = ["requests", "pandas", "openpyxl", "pytest"]
+skip = [".git", "__pycache__", ".venv", ".mypy_cache", ".pytest_cache"]
+
+[tool.mypy]
+disallow_untyped_defs = true
+warn_return_any = true
+ignore_missing_imports = false
+exclude = '''
+/(
+    venv
+  | \.git
+  | __pycache__
+  | \.mypy_cache
+  | \.pytest_cache
+)/
+'''
